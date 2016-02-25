@@ -4,12 +4,17 @@
 
 table {
     border-collapse: collapse;
+    border: 0px;
+    width: 100%;
 }
 
 td {
-    padding: 12px;
+    padding: 15px;
 }
 
+h1 {
+    text-align: center;
+}
 .even {
-    background-color: #D6E1C3;
+    background-color: #D3D3D3;
 }
