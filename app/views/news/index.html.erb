@@ -1,5 +1,4 @@
 <h1>Top 5 news from the front page of internet</h1>
-<% cache('top5', :expires_in => 10.minutes) do %>
 <table border="1">
 <% @news.each do |new| %>
 <tr class=<%= cycle("even","odd")%>>
@@ -7,6 +6,5 @@
     <td><%= link_to  new[2], new[3], :target => '_blank' %></td>
     <td>Category: <%=  new[4] %></td>
 </tr>
-<% end %>
 <% end %>
 </table>

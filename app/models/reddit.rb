@@ -4,12 +4,19 @@ include HTTParty
     base_uri 'https://www.reddit.com/r/all/top.json'
     default_params sort: "top", t: "day"
     format :json
-
+    @@lastTime=nil
+    @@lastCache=nil
     def self.top5
+        
+        time=Time.now.utc
+        if @@lastTime.nil? || time-@@lastTime > 60
+            @@lastTime=time
+        else
+            return @@lastCache
+        end
         banned_url =["imgur", "facebook", "youtu","makeameme","wikipedia","self","gfycat"]
         banned_extension=[".gif",".png",".jpg"]
         banned_subreddit=["funny","aww","porn","gifs","pics","mildlyinteresting","todayilearned","h3h3productions"]
-        time=Time.now.utc
         top5title=[]
         lowestscore=9999
         after=""
@@ -32,7 +39,7 @@ include HTTParty
             top5title.sort!{|x,y| y[0]<=>x[0]}
             break if  top5title.size >  4 && lowestscore+1000 < top5title[4][0]
         end
-        top5title[0..4]
+        @@lastCache=top5title[0..4]
 
     end
 
