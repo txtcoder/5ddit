@@ -34,10 +34,13 @@ include HTTParty
                 title=x["data"]["title"]
                 url=x["data"]["url"]
                 category=x["data"]["subreddit"]
-                top5title.push([score,origscore,title,url,category])
+                domain=URI.parse(url).host
+                posted=(time-x["data"]["created_utc"].to_i).to_i/60
+                comment="https://www.reddit.com"+x["data"]["permalink"]
+                top5title.push({score: score, origscore: origscore, title: title, url: url, category: category, domain: domain, posted: posted, commet: comment})
             end
-            top5title.sort!{|x,y| y[0]<=>x[0]}
-            break if  top5title.size >  4 && lowestscore-1000 < top5title[4][0]
+            top5title.sort!{|x,y| y[:score]<=>x[:score]}
+            break if  top5title.size >  4 && lowestscore-1000 < top5title[4][:score]
         end
         @@lastCache=top5title[0..4]
 

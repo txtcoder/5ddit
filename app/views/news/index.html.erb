@@ -2,9 +2,9 @@
 <table>
 <% @news.each do |new| %>
 <tr class=<%= cycle("even","odd")%>>
-    <td><%= new[1] %></td>
-    <td><%= link_to  new[2], new[3], :target => '_blank' %></td>
-    <td>Category: <%=  new[4] %></td>
+    <td><%= new[:score] %></td>
+    <td><%= link_to  new[:title], new[:url], :target => '_blank' %></td>
+    <td>Source: <%=  new[:domain] %></td>
 </tr>
 <% end %>
 </table>
