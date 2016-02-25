@@ -1,13 +1,13 @@
 class Reddit
 include HTTParty
   
-    base_uri 'https://www.reddit.com/r/all.json'
+    base_uri 'https://www.reddit.com/r/all/top.json'
     default_params sort: "top", t: "day"
     format :json
 
     def self.top5
         banned_url =["imgur", "facebook", "youtu","makeameme","wikipedia","self","gfycat"]
-        banned_extension=[".gif",".png"]
+        banned_extension=[".gif",".png",".jpg"]
         banned_subreddit=["funny","aww","porn","gifs","pics","mildlyinteresting","todayilearned","h3h3productions"]
         time=Time.now.utc
         top5title=[]
