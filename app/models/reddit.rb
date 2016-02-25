@@ -37,7 +37,7 @@ include HTTParty
                 top5title.push([score,origscore,title,url,category])
             end
             top5title.sort!{|x,y| y[0]<=>x[0]}
-            break if  top5title.size >  4 && lowestscore+1000 < top5title[4][0]
+            break if  top5title.size >  4 && lowestscore-1000 < top5title[4][0]
         end
         @@lastCache=top5title[0..4]
 
