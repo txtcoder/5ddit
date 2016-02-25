@@ -1,10 +1,13 @@
 <h1>Top 5 news from the front page of internet</h1>
+<br/>
 <table>
 <% @news.each do |new| %>
 <tr class=<%= cycle("even","odd")%>>
     <td><%= new[:score] %></td>
-    <td><%= link_to  new[:title], new[:url], :target => '_blank' %></td>
-    <td>Source: <%=  new[:domain] %></td>
+    <td><p class="title"><%= link_to  new[:title], new[:url], :target => '_blank' %></p>
+    <p class="source">Source: <%=  new[:domain] %></p>
+    <p class="details">Posted: <%= if new[:posted] < 60 then "#{new[:posted]} minutes ago" else "#{new[:posted].to_i/60} hours ago" end %></p>
+    </td>
 </tr>
 <% end %>
 </table>
