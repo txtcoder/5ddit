@@ -23,7 +23,7 @@ include HTTParty
         else
             return @@lastCache
         end
-        banned_url =["imgur", "facebook", "youtu","makeameme","wikipedia","self","gfycat"]
+        banned_url =["imgur", "facebook", "youtu","makeameme","wikipedia","self","gfycat","twitter"]
         banned_extension=[".gif",".png",".jpg"]
         banned_subreddit=["funny","aww","porn","gifs","pics","mildlyinteresting","todayilearned","h3h3productions"]
         top5title=[]
