@@ -3,10 +3,23 @@
 <table>
 <% @news.each do |new| %>
 <tr class=<%= cycle("even","odd")%>>
-    <td><%= new[:score] %></td>
-    <td><p class="title"><%= link_to  new[:title], new[:url], :target => '_blank' %></p>
+    <% temp = new[:original_score] 
+        arr = [0,5000,5500,6200,7100,8200,9500,11000,12700,14600,999999] 
+        i = (0...arr.size).bsearch {|x| arr[x]>=temp }%>
+    <td><p class="title"><%= link_to  new[:title], new[:url], :target => '_blank' %>
+        <div class="hotness">
+       <% ((i+1)/2).times do %>
+                <%= image_tag("hot.png", size: "20x20") %>
+        <% end %>
+        <% if i%2==0 %>
+            <%= image_tag("heat.png", size: "20x20") %>
+        <% end %>
+        </div>
+
+    </p>
     <p class="source">Source: <%=  new[:domain] %></p>
     <p class="details">Posted: <%= if new[:posted] < 60 then "#{new[:posted]} minutes ago" else "#{new[:posted].to_i/60} hours ago" end %></p>
+    <hr/>
     </td>
 </tr>
 <% end %>
