@@ -38,7 +38,7 @@ include HTTParty
                 next if banned_extension.any? {|y| x["data"]["url"].end_with?(y)}
                 next if banned_subreddit.any? {|y| x["data"]["subreddit"]==y}
 
-                score=x["data"]["score"]-(time-x["data"]["created_utc"].to_i).to_i/18
+                score=x["data"]["score"]-(time-x["data"]["created_utc"].to_i).to_i/27
                 origscore=x["data"]["score"]
                 title=x["data"]["title"]
                 url=x["data"]["url"]
