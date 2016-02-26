@@ -15,7 +15,7 @@ include HTTParty
         end
     end
 
-    def self.top5test
+    def self.top5
         
         time=Time.now.utc
         if @@lastTime.nil? || time-@@lastTime > 60
