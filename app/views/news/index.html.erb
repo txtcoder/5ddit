@@ -8,10 +8,10 @@
         i = (0...arr.size).bsearch {|x| arr[x]>=temp }%>
     <td><p class="title"><%= link_to  new[:title], new[:url], :target => '_blank' %>
         <div class="hotness">
-       <% ((i+1)/2).times do %>
+       <% (i/2).times do %>
                 <%= image_tag("hot.png", size: "20x20") %>
         <% end %>
-        <% if i%2==0 %>
+        <% if i%2==1 %>
             <%= image_tag("heat.png", size: "20x20") %>
         <% end %>
         </div>

@@ -6,6 +6,15 @@ include HTTParty
     format :json
     @@lastTime=nil
     @@lastCache=nil
+
+    def self.top5cache
+        if @@lastCache.nil?
+            return self.top5
+        else
+            @@lastCache
+        end
+    end
+
     def self.top5
         
         time=Time.now.utc
