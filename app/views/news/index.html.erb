@@ -6,7 +6,7 @@
     <% temp = new[:original_score] 
         arr = [0,5000,5500,6200,7100,8200,9500,11000,12700,14600,999999] 
         i = (0...arr.size).bsearch {|x| arr[x]>=temp }%>
-    <td><p class="title"><%= link_to  new[:title], new[:url], :target => '_blank' %>
+    <td><p class="title"><%= link_to "#{new[:title]}".html_safe, new[:url], :target => '_blank' %>
         <div class="hotness">
        <% (i/2).times do %>
                 <%= image_tag("hot.png", size: "20x20") %>

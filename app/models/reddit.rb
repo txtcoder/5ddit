@@ -38,7 +38,7 @@ include HTTParty
                 next if banned_extension.any? {|y| x["data"]["url"].end_with?(y)}
                 next if banned_subreddit.any? {|y| x["data"]["subreddit"]==y}
 
-                score=x["data"]["score"]-(time-x["data"]["created_utc"].to_i).to_i/36
+                score=x["data"]["score"]-(time-x["data"]["created_utc"].to_i).to_i/18
                 origscore=x["data"]["score"]
                 title=x["data"]["title"]
                 url=x["data"]["url"]
@@ -49,7 +49,7 @@ include HTTParty
                 top5title.push({score: score, original_score: origscore, title: title, url: url, category: category, domain: domain, posted: posted, commet: comment})
             end
             top5title.sort!{|x,y| y[:score]<=>x[:score]}
-            break if  top5title.size >  4 && lowestscore-1000 < top5title[4][:score]
+            break if  top5title.size >  4 && lowestscore < top5title[4][:score]
         end
         @@lastCache=top5title[0..4]
 
