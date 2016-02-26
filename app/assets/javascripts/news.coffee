@@ -1,3 +1,11 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+update = ->
+  $.ajax
+    type: 'GET'
+    url: '/news/index?cache=true'
+    success: (result) ->
+      #I assume you want to do something on controller action execution success?
+      $('body').replaceWith result
+      return
+  return
+
+$(document).ready update()
