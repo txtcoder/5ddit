@@ -23,7 +23,7 @@ include HTTParty
         else
             return @@lastCache
         end
-        banned_url =["imgur", "facebook", "youtu","makeameme","wikipedia","self","gfycat","twitter"]
+        banned_url =["imgur", "facebook", "youtu","makeameme","wikipedia","self","gfycat","twitter", "docs.google.com"]
         banned_extension=[".gif",".png",".jpg"]
         banned_subreddit=["funny","aww","porn","gifs","pics","mildlyinteresting","todayilearned","h3h3productions"]
         top5title=[]
@@ -38,7 +38,7 @@ include HTTParty
                 next if banned_extension.any? {|y| x["data"]["url"].end_with?(y)}
                 next if banned_subreddit.any? {|y| x["data"]["subreddit"]==y}
 
-                score=x["data"]["score"]-(time-x["data"]["created_utc"].to_i).to_i/27
+                score=x["data"]["score"]-(time-x["data"]["created_utc"].to_i).to_i/36
                 origscore=x["data"]["score"]
                 title=x["data"]["title"]
                 url=x["data"]["url"]
