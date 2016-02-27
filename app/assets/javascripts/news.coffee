@@ -2,9 +2,10 @@ update = ->
   $.ajax
     type: 'GET'
     url: '/news/index?cache=true'
+    async: true
     success: (result) ->
       #I assume you want to do something on controller action execution success?
-      $('body').replaceWith result
+      $('table').replaceWith result
       return
   return
 

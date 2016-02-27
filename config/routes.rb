@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'about' => 'static_pages#about'
+
   get 'news/index'
   root 'news#index'
   # The priority is based upon order of creation: first created -> highest priority.
