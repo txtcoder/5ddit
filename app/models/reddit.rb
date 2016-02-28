@@ -46,7 +46,19 @@ include HTTParty
                 domain=URI.parse(url).host
                 posted=(time-x["data"]["created_utc"].to_i).to_i/60
                 comment="https://www.reddit.com"+x["data"]["permalink"]
-                top5title.push({score: score, original_score: origscore, title: title, url: url, category: category, domain: domain, posted: posted, commet: comment})
+
+                #check duplicates
+                skip = false
+                top5title.each do |post|
+                    if title == post[:title] && url==post[:url] && category==post[:category]
+                        skip=true
+                    elsif title == post[:title] || url==post[:url]
+                        post[:score]+=score/2
+                        post[:original_score]+=origscore/2
+                        skip = true
+                    end
+                end
+                top5title.push({score: score, original_score: origscore, title: title, url: url, category: category, domain: domain, posted: posted, commet: comment}) unless skip
             end
             top5title.sort!{|x,y| y[:score]<=>x[:score]}
             break if  top5title.size >  4 && lowestscore < top5title[4][:score]
