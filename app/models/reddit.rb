@@ -18,7 +18,7 @@ include HTTParty
     def self.top5
         
         time=Time.now.utc
-        if @@lastTime.nil? || time-@@lastTime > 60
+        if @@lastTime.nil? || time-@@lastTime > 600
             @@lastTime=time
         else
             return @@lastCache
