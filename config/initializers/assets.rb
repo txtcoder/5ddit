@@ -11,5 +11,5 @@ Rails.application.config.assets.version = '1.0'
 # Rails.application.config.assets.precompile += %w( search.js )
 #
 %w( news static_pages ).each do |controller|
-  Rails.application.config.assets.precompile += ["#{controller}.js.coffee", "#{controller}.css"]
+  Rails.application.config.assets.precompile += ["#{controller}.coffee", "#{controller}.css", "#{controller}.js"]
 end

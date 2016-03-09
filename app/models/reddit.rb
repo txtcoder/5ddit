@@ -1,7 +1,7 @@
 class Reddit
 include HTTParty
   
-    base_uri 'https://www.reddit.com/r/all/top.json'
+    base_uri 'https://www.reddit.com'
     default_params sort: "top", t: "day"
     format :json
     @@lastTime=nil
@@ -30,7 +30,7 @@ include HTTParty
         lowestscore=9999
         after=""
         loop do
-            tquery=get("", query:{after: after})
+            tquery=get("/r/all/top.json", query:{after: after})
             after = tquery["data"]["after"]
             tquery["data"]["children"].each do |x|
                 lowestscore=x["data"]["score"] if x["data"]["score"] < lowestscore
@@ -45,7 +45,7 @@ include HTTParty
                 category=x["data"]["subreddit"]
                 domain=URI.parse(url).host
                 posted=(time-x["data"]["created_utc"].to_i).to_i/60
-                comment="https://www.reddit.com"+x["data"]["permalink"]
+                comment=x["data"]["permalink"]
 
                 #check duplicates
                 skip = false
@@ -58,13 +58,39 @@ include HTTParty
                         skip = true
                     end
                 end
-                top5title.push({score: score, original_score: origscore, title: title, url: url, category: category, domain: domain, posted: posted, commet: comment}) unless skip
+                top5title.push({score: score, original_score: origscore, title: title, url: url, category: category, domain: domain, posted: posted, comment: comment}) unless skip
             end
             top5title.sort!{|x,y| y[:score]<=>x[:score]}
             break if  top5title.size >  4 && lowestscore < top5title[4][:score]
         end
-        @@lastCache=top5title[0..4]
+        res = top5title[0..4]
+        res.map! {|x| x.merge({comments: self.get_comment(x[:comment],x[:score]/100*15)})}
+        @@lastCache=res
 
+    end
+
+    def self.get_comment(commentUrl,score=1000)
+        topcomments=[]
+        comments=get(commentUrl+".json")
+        puts topcomments
+        start=comments[1] 
+        topcomments = self.simplifyJson(start,score)
+    end
+
+    
+    def self.simplifyJson(json,score)
+        json=json["data"]["children"]
+        arr=[]
+        json.each do |x|
+            if x["data"]["score"] && x["data"]["score"]>score
+                replies=simplifyJson(x["data"]["replies"],score)
+                arr << {comment: CGI.unescapeHTML(x["data"]["body_html"]), score: x["data"]["score"], author: x["data"]["author"],  replies: replies}
+            end
+        end
+        if arr.empty?
+            arr=nil
+        end
+        arr
     end
 
 end
