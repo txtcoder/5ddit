@@ -23,9 +23,9 @@ include HTTParty
         else
             return @@lastCache
         end
-        banned_url =["imgur", "facebook", "youtu","meme","wikipedia","self","gfycat","twitter", "docs.google.com", "streamable","reddit","vimeo","liveleak"]
+        banned_url =["imgur", "facebook", "youtu","meme","wikipedia","self","gfycat","twitter", "docs.google.com", "streamable","reddit","vimeo","liveleak","imgflip"]
         banned_extension=[".gif",".png",".jpg",".pdf", ".gifv"]
-        banned_subreddit=["funny","aww","earthporn","gifs","pics","mildlyinteresting","todayilearned","h3h3productions","SandersForPresident", "videos"]
+        banned_subreddit=["funny","aww","earthporn","gifs","pics","mildlyinteresting","todayilearned","h3h3productions","SandersForPresident", "videos","wtf","adviceanimals"]
         top5title=[]
         lowestscore=9999
         after=""
