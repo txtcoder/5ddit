@@ -16,7 +16,7 @@
 
     </p>
     <p class="source">Source: <%=  new[:domain] %></p>
-    <p class="details">Posted: <%= if new[:posted] < 60 then "#{new[:posted]} minutes ago" else "#{new[:posted].to_i/60} hours ago" end %> <span id="showcomment<%= j %>">show comment</span></p>
+    <p class="details">Posted: <%= if new[:posted] < 60 then "#{new[:posted]} minutes ago" else "#{new[:posted].to_i/60} hours ago" end %> <span id="showcomment<%= j %>"></span></p>
     <div id="comment<%= j %>" style="display: none"><ul>
     <%= showComments(new[:comments]).html_safe %>
     </ul>

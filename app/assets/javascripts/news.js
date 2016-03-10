@@ -7,9 +7,7 @@
       url: '/news/index?cache=true',
       async: true,
       success: function(result) {
-        console.log("before update");
         $('table').replaceWith(result);
-        console.log("after update");
         setComment();
       }
     });
@@ -34,20 +32,25 @@
   }
   setComment = function(){
     for (i=0; i < 5; i++) {
+        comment=document.getElementById("comment"+i);
+        if ($.trim(comment.innerText) === "") {
+            continue;
+        }
         document.getElementById("showcomment"+i).addEventListener("click", toggleCommentDelegate(i));
         document.getElementById("showcomment"+i).style.color="#428bca";
+        document.getElementById("showcomment"+i).innerText="show comment";
     }
 };
 
 
   update = function() {
     var x;
-    //setComment();
+    setComment();
     x = setInterval(start, 600 * 1000);
     start();
   };
 
     
-  $(document).ready(update());
+  $(document).ready(update);
 }).call(this);
 

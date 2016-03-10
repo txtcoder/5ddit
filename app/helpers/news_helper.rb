@@ -1,7 +1,7 @@
 module NewsHelper
     def showComments(json)
        res=""
-        return "no comments" if json.nil?
+        return "" if json.nil?
        json.each do |x|
             res << "<li>"
             res << "Posted by: " + "<span>" + x[:author] << "</span>"
