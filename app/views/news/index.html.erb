@@ -1,6 +1,6 @@
 <table>
 <% @news.each.with_index do |new, j| %>
-<tr class=<%= cycle("even","odd")%>>
+<tr>
     <% temp = new[:original_score] 
         arr = [0,5000,5500,6200,7100,8200,9500,11000,12700,14600,999999] 
         i = (0...arr.size).bsearch {|x| arr[x]>=temp }%>
@@ -17,7 +17,7 @@
     </p>
     <p class="source">Source: <%=  new[:domain] %></p>
     <p class="details">Posted: <%= if new[:posted] < 60 then "#{new[:posted]} minutes ago" else "#{new[:posted].to_i/60} hours ago" end %> <span id="showcomment<%= j %>"></span></p>
-    <div id="comment<%= j %>" style="display: none"><ul>
+    <div class = "comments" id="comment<%= j %>" style="display: none"><ul class="firstul">
     <%= showComments(new[:comments]).html_safe %>
     </ul>
  </div>
