@@ -36,7 +36,7 @@ include HTTParty
                 lowestscore=x["data"]["score"] if x["data"]["score"] < lowestscore
                 next if banned_url.any?{|y| x["data"]["domain"].include?(y)}
                 next if banned_extension.any? {|y| x["data"]["url"].end_with?(y)}
-                next if banned_subreddit.any? {|y| x["data"]["subreddit"]==y}
+                next if banned_subreddit.any? {|y| x["data"]["subreddit"].downcase==y}
 
                 score=x["data"]["score"]-(time-x["data"]["created_utc"].to_i).to_i/36
                 origscore=x["data"]["score"]
