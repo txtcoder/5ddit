@@ -9,7 +9,7 @@ include HTTParty
 
     def self.top5cache
         if @@lastCache.nil?
-            return []
+            return self.top5
         else
             @@lastCache
         end
