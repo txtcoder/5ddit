@@ -25,10 +25,14 @@ include HTTParty
         end
         banned_url =["imgur", "facebook", "youtu","meme","wikipedia","self","gfycat","twitter", "docs.google.com", "streamable","reddit","vimeo","liveleak","imgflip"]
         banned_extension=[".gif",".png",".jpg",".pdf", ".gifv"]
-        banned_subreddit=["funny","aww","earthporn","gifs","pics","mildlyinteresting","todayilearned","h3h3productions","SandersForPresident", "videos","wtf","adviceanimals",'news','politics']
+        banned_subreddit=["funny","aww","earthporn","gifs","pics","mildlyinteresting","todayilearned","h3h3productions","videos","wtf","adviceanimals"]
+        us_limit_subreddit=["news","politics","sandersforpresident"]
+        entertainment_limit_subreddit=["music","movies","books"]
         top5title=[]
         lowestscore=9999
         after=""
+        us_limit = 2
+        entertainment_limit = 1
         loop do
             tquery=get("/r/all/top.json", query:{after: after})
             after = tquery["data"]["after"]
@@ -38,6 +42,15 @@ include HTTParty
                 next if banned_extension.any? {|y| x["data"]["url"].end_with?(y)}
                 next if banned_subreddit.any? {|y| x["data"]["subreddit"].downcase==y}
 
+                if us_limit_subreddit.any? {|y| x["data"]["subreddit"].downcase==y}
+                    us_limit-=1
+                    next if us_limit < 0
+                end
+                if entertainment_limit_subreddit.any? {|y| x["data"]["subreddit"].downcase==y}
+                    entertainment_limit-=1
+                    next if entertainment_limit < 0
+                end
+               
                 score=x["data"]["score"]-(time-x["data"]["created_utc"].to_i).to_i/36
                 origscore=x["data"]["score"]
                 title=x["data"]["title"]
