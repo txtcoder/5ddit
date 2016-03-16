@@ -27,7 +27,7 @@ include HTTParty
         banned_extension=[".gif",".png",".jpg",".pdf", ".gifv"]
         banned_subreddit=["funny","aww","earthporn","gifs","pics","mildlyinteresting","todayilearned","h3h3productions","videos","wtf","adviceanimals"]
         us_limit_subreddit=["news","politics","sandersforpresident"]
-        entertainment_limit_subreddit=["music","movies","books"]
+        entertainment_limit_subreddit=["music","movies","books","television"]
         top5title=[]
         lowestscore=9999
         after=""
