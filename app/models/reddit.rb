@@ -24,7 +24,7 @@ include HTTParty
             return @@lastCache
         end
         banned_url =["imgur", "facebook", "youtu","meme","wikipedia","self","gfycat","twitter", "docs.google.com", "streamable","reddit","vimeo","liveleak","imgflip"]
-        banned_extension=[".gif",".png",".jpg",".pdf", ".gifv"]
+        banned_extension=[".gif",".png",".jpg",".pdf", ".gifv",".mp3",".mp4",".mov"]
         banned_subreddit=["funny","aww","earthporn","gifs","pics","mildlyinteresting","todayilearned","h3h3productions","videos","wtf","adviceanimals"]
         us_limit_subreddit=["news","politics","sandersforpresident"]
         entertainment_limit_subreddit=["music","movies","books","television"]
@@ -39,7 +39,7 @@ include HTTParty
             tquery["data"]["children"].each do |x|
                 lowestscore=x["data"]["score"] if x["data"]["score"] < lowestscore
                 next if banned_url.any?{|y| x["data"]["domain"].include?(y)}
-                next if banned_extension.any? {|y| x["data"]["url"].end_with?(y)}
+                next if banned_extension.any? {|y| x["data"]["url"].gsub(/\?.*/, '').end_with?(y)}
                 next if banned_subreddit.any? {|y| x["data"]["subreddit"].downcase==y}
 
                 if us_limit_subreddit.any? {|y| x["data"]["subreddit"].downcase==y}
