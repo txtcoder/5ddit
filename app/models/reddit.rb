@@ -85,9 +85,10 @@ include HTTParty
     def self.get_comment(commentUrl,score=1000)
         topcomments=[]
         comments=get(commentUrl+".json")
-        puts topcomments
-        start=comments[1] 
-        topcomments = self.simplifyJson(start,score)
+        if comments.kind_of?(Array)
+            start=comments[1] 
+            topcomments = self.simplifyJson(start,score)
+        end
     end
 
     
@@ -95,7 +96,7 @@ include HTTParty
         json=json["data"]["children"]
         arr=[]
         json.each do |x|
-            if x["data"]["score"] && x["data"]["score"]>score
+            if x["data"]["score"] && x["data"]["score"]>score && x["data"]["author"] != "[deleted]"
                 replies=simplifyJson(x["data"]["replies"],score)
                 arr << {comment: CGI.unescapeHTML(x["data"]["body_html"]), score: x["data"]["score"], author: x["data"]["author"],  replies: replies}
             end
