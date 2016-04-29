@@ -7,6 +7,10 @@ include HTTParty
     @@lastTime=nil
     @@lastCache=nil
 
+    def self.debug
+        return "#{lastCache}, #{lastTime}, #{Time.now.utc}"
+    end
+
     def self.top5cache
         if @@lastCache.nil?
             return self.top5
