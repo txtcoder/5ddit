@@ -8,7 +8,7 @@ include HTTParty
     @@lastCache=nil
 
     def self.debug
-        return "#{lastCache}, #{lastTime}, #{Time.now.utc}"
+        return "#{@@lastCache}, #{@@lastTime}, #{Time.now.utc}"
     end
 
     def self.top5cache
