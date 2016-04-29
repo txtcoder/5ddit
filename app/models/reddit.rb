@@ -38,8 +38,8 @@ include HTTParty
         us_limit = 2
         entertainment_limit = 1
         loop do
-            tquery=get("/r/all/top.json", query:{after: after})
-            unless tquery.kind_of?(Array)
+            tquery=get("/r/all/top.json", query:{after: after}, headers: {"User-Agent" => "5ddit"})
+            unless tquery.kind_of?(Hash)
                 raise "reddit is down"
             end
             after = tquery["data"]["after"]
