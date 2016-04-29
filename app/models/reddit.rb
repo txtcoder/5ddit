@@ -39,6 +39,9 @@ include HTTParty
         entertainment_limit = 1
         loop do
             tquery=get("/r/all/top.json", query:{after: after})
+            unless tquery.kind_of?(Array)
+                raise "reddit is down"
+            end
             after = tquery["data"]["after"]
             tquery["data"]["children"].each do |x|
                 lowestscore=x["data"]["score"] if x["data"]["score"] < lowestscore
