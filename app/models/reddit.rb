@@ -66,6 +66,7 @@ include HTTParty
                 domain=URI.parse(url).host
                 posted=(time-x["data"]["created_utc"].to_i).to_i/60
                 comment=x["data"]["permalink"]
+                thumbnail=x["data"]["thumbnail"]
 
                 #check duplicates
                 skip = false
@@ -78,7 +79,7 @@ include HTTParty
                         skip = true
                     end
                 end
-                top5title.push({score: score, original_score: origscore, title: title, url: url, category: category, domain: domain, posted: posted, comment: comment}) unless skip
+                top5title.push({score: score, original_score: origscore, title: title, url: url, category: category, domain: domain, posted: posted, comment: comment, thumbnail: thumbnail}) unless skip
             end
             top5title.sort!{|x,y| y[:score]<=>x[:score]}
             break if  top5title.size >  4 && lowestscore < top5title[4][:score]
