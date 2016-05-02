@@ -8,7 +8,7 @@
            <% (temp/1000).times do %>
                     <%= image_tag("https://s3-us-west-2.amazonaws.com/5ddit/hot.png", size: "20x20") %>
             <% end %>
-            <% if temp%1000>=500 %>
+            <% if temp<1000 %>
                 <%= image_tag("https://s3-us-west-2.amazonaws.com/5ddit/heat.png", size: "20x20") %>
             <% end %>
             </div>
