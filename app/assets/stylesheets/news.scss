@@ -43,6 +43,23 @@ a:visited {
     padding: 10px;
     margin: 20px;
 }
+
+@media (max-width: 767px) {
+    .even .odd {
+        padding: 0px;
+        margin: 0px;
+        border-right:10px;
+    }
+    ul {
+        padding: 10px;
+    }
+    table {
+        width: 90%;
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+}
+
 .title {
     font-size: 20px;
 }
