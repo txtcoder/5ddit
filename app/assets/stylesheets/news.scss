@@ -23,7 +23,9 @@ td {
 
 tr {
 }
-
+.commentContent a {
+    word-break: break-all;
+}
 a:visited {
    color: #7D26CD;
 }
