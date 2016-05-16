@@ -29,13 +29,13 @@ include HTTParty
         end
         banned_url =["imgur", "facebook", "youtu","meme","wikipedia","self","gfycat","twitter", "docs.google.com", "streamable","reddit","vimeo","liveleak","imgflip","giphy","sli.mg","oddshot.tv","spotify"]
         banned_extension=[".gif",".png",".jpg",".pdf", ".gifv",".mp3",".mp4",".mov"]
-        banned_subreddit=["funny","aww","earthporn","gifs","pics","mildlyinteresting","todayilearned","h3h3productions","videos","wtf","adviceanimals","woahdude","subredditsimulator"]
-        us_limit_subreddit=["news","politics","sandersforpresident"]
+        banned_subreddit=["funny","aww","earthporn","gifs","pics","mildlyinteresting","todayilearned","h3h3productions","videos","wtf","adviceanimals","woahdude","subredditsimulator","movies","music","books","television"]
+        us_limit_subreddit=["politics","sandersforpresident"]
         entertainment_limit_subreddit=["music","movies","books","television"]
         top5title=[]
         lowestscore=9999
         after=""
-        us_limit = 2
+        us_limit = 1
         entertainment_limit = 1
         loop do
             tquery=get("/r/all/top.json", query:{after: after}, headers: {"User-Agent" => "5ddit"})
