@@ -30,13 +30,10 @@ include HTTParty
         banned_url =["imgur", "facebook", "youtu","meme","wikipedia","self","gfycat","twitter", "docs.google.com", "streamable","reddit","vimeo","liveleak","imgflip","giphy","sli.mg","oddshot.tv","spotify"]
         banned_extension=[".gif",".png",".jpg",".pdf", ".gifv",".mp3",".mp4",".mov"]
         banned_subreddit=["funny","aww","earthporn","gifs","pics","mildlyinteresting","todayilearned","h3h3productions","videos","wtf","adviceanimals","woahdude","subredditsimulator","movies","music","books","television"]
-        us_limit_subreddit=["politics","sandersforpresident"]
-        entertainment_limit_subreddit=["music","movies","books","television"]
+        us_nerfed_subreddit=["news","politics","sandersforpresident"]
         top5title=[]
         lowestscore=9999
         after=""
-        us_limit = 1
-        entertainment_limit = 1
         loop do
             tquery=get("/r/all/top.json", query:{after: after}, headers: {"User-Agent" => "5ddit"})
             unless tquery.kind_of?(Hash)
@@ -49,16 +46,11 @@ include HTTParty
                 next if banned_extension.any? {|y| x["data"]["url"].gsub(/\?.*/, '').end_with?(y)}
                 next if banned_subreddit.any? {|y| x["data"]["subreddit"].downcase==y}
 
-                if us_limit_subreddit.any? {|y| x["data"]["subreddit"].downcase==y}
-                    us_limit-=1
-                    next if us_limit < 0
-                end
-                if entertainment_limit_subreddit.any? {|y| x["data"]["subreddit"].downcase==y}
-                    entertainment_limit-=1
-                    next if entertainment_limit < 0
+                score=x["data"]["score"]-(time-x["data"]["created_utc"].to_i).to_i/36
+                if us_nerfed_subreddit.any? {|y| x["data"]["subreddit"].downcase==y}
+                    score=score*0.8
                 end
                
-                score=x["data"]["score"]-(time-x["data"]["created_utc"].to_i).to_i/36
                 origscore=x["data"]["score"]
                 title=x["data"]["title"]
                 url=x["data"]["url"]
