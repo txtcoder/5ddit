@@ -16,11 +16,11 @@
   toggleComment = function(i) {
         var target = "comment"+i;
         var source = "showcomment"+i;
-        if (document.getElementById(source).innerText == "show comment") {
-            document.getElementById(source).innerText = "hide comment";
+        if (document.getElementById(source).innerText == "+show comment") {
+            document.getElementById(source).innerText = "-hide comment";
             document.getElementById(target).style.display = "block";
         } else {
-            document.getElementById(source).innerText = "show comment";
+            document.getElementById(source).innerText = "+show comment";
             document.getElementById(target).style.display = "none";
         }
     };
@@ -38,7 +38,7 @@
         }
         document.getElementById("showcomment"+i).addEventListener("click", toggleCommentDelegate(i));
         document.getElementById("showcomment"+i).style.color="#428bca";
-        document.getElementById("showcomment"+i).innerText="show comment";
+        document.getElementById("showcomment"+i).innerText="+show comment";
     }
 };
 
