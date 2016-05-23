@@ -29,7 +29,7 @@ include HTTParty
         end
         banned_url =["imgur", "facebook", "youtu","meme","wikipedia","self","gfycat","twitter", "docs.google.com", "streamable","reddit","vimeo","liveleak","imgflip","giphy","sli.mg","oddshot.tv","spotify"]
         banned_extension=[".gif",".png",".jpg",".pdf", ".gifv",".mp3",".mp4",".mov"]
-        banned_subreddit=["funny","aww","earthporn","gifs","pics","mildlyinteresting","todayilearned","h3h3productions","videos","wtf","adviceanimals","woahdude","subredditsimulator","movies","music","books","television"]
+        banned_subreddit=["funny","aww","earthporn","gifs","pics","mildlyinteresting","todayilearned","h3h3productions","videos","wtf","adviceanimals","woahdude","subredditsimulator","movies","music","books","television","comics"]
         us_nerfed_subreddit=["news","politics","sandersforpresident"]
         top5title=[]
         lowestscore=9999
