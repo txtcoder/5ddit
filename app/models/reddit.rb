@@ -55,7 +55,7 @@ include HTTParty
                 title=x["data"]["title"]
                 url=x["data"]["url"]
                 category=x["data"]["subreddit"]
-                domain=URI.parse(url).host
+                domain=x["data"]["domain"]
                 posted=(time-x["data"]["created_utc"].to_i).to_i/60
                 comment=x["data"]["permalink"]
                 thumbnail=x["data"]["thumbnail"]
