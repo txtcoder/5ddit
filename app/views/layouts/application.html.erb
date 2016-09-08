@@ -26,6 +26,7 @@ minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
   </div>
 </nav>
 <%= yield %>
+<% unless @from_app %>
 <div id="googleAds">
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- ads -->
@@ -37,6 +38,7 @@ minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <script>
 (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
+<% end %>
 </div>
 </body>
 </html>

@@ -1,5 +1,11 @@
 class NewsController < ApplicationController
   def index
+    user_agent = request.env['HTTP_USER_AGENT']
+    if user_agent.index('X-Requested-With')
+        @from_app = true
+    else
+        @from_app = false
+    end
     @cache = params[:cache]
     @debug = params[:debug]
     if @debug
