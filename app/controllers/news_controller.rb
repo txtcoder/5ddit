@@ -2,7 +2,7 @@ class NewsController < ApplicationController
   def index
     user_agent = request.env['HTTP_USER_AGENT']
     @user_agent = user_agent
-    if user_agent.index('X-Requested-With')
+    if /Version\/\d\.\d Chrome/.match(user_agent)
         @from_app = true
     else
         @from_app = false
