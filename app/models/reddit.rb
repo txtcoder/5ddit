@@ -46,6 +46,8 @@ include HTTParty
                 next if banned_extension.any? {|y| x["data"]["url"].gsub(/\?.*/, '').end_with?(y)}
                 next if banned_subreddit.any? {|y| x["data"]["subreddit"].downcase==y}
 
+                next if x["data"]["is_self"] && x["data"]["selftext"].length < 1000
+
                 score=x["data"]["score"]-(time-x["data"]["created_utc"].to_i).to_i/36
                 if us_nerfed_subreddit.any? {|y| x["data"]["subreddit"].downcase==y}
                     score=score*0.8
