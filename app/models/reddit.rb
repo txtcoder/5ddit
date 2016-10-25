@@ -12,20 +12,20 @@ include HTTParty
     end
 
     def self.top5cache
-        if @@lastCache.nil?
+        if $redis.get("top5") == nil
             return self.top5
         else
-            @@lastCache
+            $redis.get("top5")
         end
     end
 
     def self.top5
         
         time=Time.now.utc
-        if @@lastCache.nil? ||  @@lastTime.nil? || time-@@lastTime > 600
+        if $redis.get("top5").nil? ||  @@lastTime.nil? || time-@@lastTime > 600
             @@lastTime=time
         else
-            return @@lastCache
+            return $redis.get("top5")
         end
         banned_url =["imgur", "facebook", "youtu","meme","wikipedia","gfycat","twitter", "docs.google.com", "streamable","reddituploads","vimeo","liveleak","imgflip","giphy","sli.mg","oddshot.tv","spotify","chzbgr","tumblr","battle.net","twitch.tv","instagram","plus.google","thepoke.co.uk","deviantart","twimg.com","imgfly","imgcert","i.redd.it"]
         banned_extension=[".gif",".png",".jpg",".pdf", ".gifv",".mp3",".mp4",".mov"]
@@ -80,7 +80,7 @@ include HTTParty
         end
         res = top5title[0..4]
         res.map! {|x| x.merge({comments: self.get_comment(x[:comment],x[:score]/100*15)})}
-        @@lastCache=res
+        $redis.set("top5",res)
 
     end
 

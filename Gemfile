@@ -33,6 +33,8 @@ gem 'httparty', '0.13.5'
 gem 'pg', :group => :production
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+gem 'redis'
+gem 'redis-namespace'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
