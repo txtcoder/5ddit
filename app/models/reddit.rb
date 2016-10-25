@@ -83,7 +83,7 @@ include HTTParty
         end
         res = top5title[0..4]
         res.map! {|x| x.merge({comments: self.get_comment(x[:comment],x[:score]/100*15)})}
-        $redis.set("top5",res.to_s)
+        $redis.set("top5",res.to_json)
         return res
     end
 
