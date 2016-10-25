@@ -17,6 +17,7 @@ include HTTParty
             return self.top5
         else
             result =  $redis.get("top5")
+            puts result.class
             return JSON.parse(result)
         end
     end
