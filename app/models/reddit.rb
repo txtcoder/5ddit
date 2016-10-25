@@ -13,12 +13,16 @@ include HTTParty
 
     def self.top5cache
         if $redis.get("top5").nil?
-            
             return self.top5
         else
-            result =  $redis.get("top5")
-            puts result.class
-            return JSON.parse(result)
+            result1 =  JSON.parse($redis.get("top1"))
+            result2 =  JSON.parse($redis.get("top2"))
+            result3 =  JSON.parse($redis.get("top3"))
+            result4 =  JSON.parse($redis.get("top4"))
+            result5 =  JSON.parse($redis.get("top5"))
+            results = []
+            results << result1 << result2 << result3 << result4 << result5
+            return results
         end
     end
 
@@ -83,7 +87,11 @@ include HTTParty
         end
         res = top5title[0..4]
         res.map! {|x| x.merge({comments: self.get_comment(x[:comment],x[:score]/100*15)})}
-        $redis.set("top5",res.to_json)
+        $redis.set("top1",res[0])
+        $redis.set("top2",res[1])
+        $redis.set("top3",res[2])
+        $redis.set("top4",res[3])
+        $redis.set("top5",res[4])
         return res
     end
 
