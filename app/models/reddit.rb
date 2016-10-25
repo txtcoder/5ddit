@@ -12,9 +12,12 @@ include HTTParty
     end
 
     def self.top5cache
-        if $redis.get("top5") == nil
+        if $redis.get("top5").nil?
+            
             return self.top5
         else
+            puts $redis.get("top5")
+            
             return $redis.get("top5")
         end
     end
