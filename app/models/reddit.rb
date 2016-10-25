@@ -12,7 +12,7 @@ include HTTParty
     end
 
     def self.top5cache
-        if $redis.get("top11").nil?
+        if $redis.get("top1").nil?
             return self.top5
         else
             result1 =  JSON.parse($redis.get("top1"))
@@ -29,7 +29,7 @@ include HTTParty
     def self.top5
         
         time=Time.now.utc
-        if $redis.get("top51").nil? ||  @@lastTime.nil? || time-@@lastTime > 600
+        if $redis.get("top1").nil? ||  @@lastTime.nil? || time-@@lastTime > 600
             @@lastTime=time
         else
             return $redis.get("top5")
