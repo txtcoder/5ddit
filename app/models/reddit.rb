@@ -32,7 +32,14 @@ include HTTParty
         if $redis.get("top1").nil? ||  @@lastTime.nil? || time-@@lastTime > 600
             @@lastTime=time
         else
-            return $redis.get("top5")
+            result1 =  JSON.parse($redis.get("top1"))
+            result2 =  JSON.parse($redis.get("top2"))
+            result3 =  JSON.parse($redis.get("top3"))
+            result4 =  JSON.parse($redis.get("top4"))
+            result5 =  JSON.parse($redis.get("top5"))
+            results = []
+            results << result1 << result2 << result3 << result4 << result5
+            return results
         end
         banned_url =["imgur", "facebook", "youtu","meme","wikipedia","gfycat","twitter", "docs.google.com", "streamable","reddituploads","vimeo","liveleak","imgflip","giphy","sli.mg","oddshot.tv","spotify","chzbgr","tumblr","battle.net","twitch.tv","instagram","plus.google","thepoke.co.uk","deviantart","twimg.com","imgfly","imgcert","i.redd.it"]
         banned_extension=[".gif",".png",".jpg",".pdf", ".gifv",".mp3",".mp4",".mov"]
