@@ -15,7 +15,7 @@ include HTTParty
         if $redis.get("top5") == nil
             return self.top5
         else
-            $redis.get("top5")
+            return $redis.get("top5")
         end
     end
 
@@ -81,7 +81,7 @@ include HTTParty
         res = top5title[0..4]
         res.map! {|x| x.merge({comments: self.get_comment(x[:comment],x[:score]/100*15)})}
         $redis.set("top5",res)
-
+        return res
     end
 
     def self.get_comment(commentUrl,score=1000)
