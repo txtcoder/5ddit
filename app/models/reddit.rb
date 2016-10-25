@@ -16,9 +16,8 @@ include HTTParty
             
             return self.top5
         else
-            puts $redis.get("top5")
-            
-            return $redis.get("top5")
+            result =  $redis.get("top5")
+            return result
         end
     end
 
