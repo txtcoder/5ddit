@@ -2,8 +2,8 @@
 <% if @news %>
     <% @news.each.with_index do |new, j| %>
     <tr>
-        <% temp = new[:original_score] %>
-        <td><p class="title"><%= link_to "#{new[:title]}".html_safe, new[:url], :target => '_blank' %>
+        <% temp = new["original_score"] %>
+        <td><p class="title"><%= link_to "#{new["title"]}".html_safe, new["url"], :target => '_blank' %>
             <div class="hotness" title="<%="#{temp} upvotes" %>">
            <% (temp/1000).times do %>
                     <%= image_tag("https://s3-us-west-2.amazonaws.com/5ddit/hot.png", size: "20x20") %>
