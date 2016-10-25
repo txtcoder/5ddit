@@ -16,6 +16,7 @@ class NewsController < ApplicationController
         render :layout => false 
     else
         @news = Reddit.top5cache
+        puts @news
     end
   end
 
