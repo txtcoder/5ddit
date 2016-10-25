@@ -29,7 +29,7 @@ include HTTParty
     def self.top5
         
         time=Time.now.utc
-        if $redis.get("top5").nil? ||  @@lastTime.nil? || time-@@lastTime > 600
+        if $redis.get("top51").nil? ||  @@lastTime.nil? || time-@@lastTime > 600
             @@lastTime=time
         else
             return $redis.get("top5")
