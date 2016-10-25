@@ -111,6 +111,9 @@ GEM
     rake (10.5.0)
     rdoc (4.2.2)
       json (~> 1.4)
+    redis (3.3.1)
+    redis-namespace (1.5.2)
+      redis (~> 3.0, >= 3.0.4)
     ref (2.0.0)
     sass (3.4.21)
     sass-rails (5.0.4)
@@ -162,6 +165,8 @@ DEPENDENCIES
   jquery-rails
   pg
   rails (= 4.2.4)
+  redis
+  redis-namespace
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   spring
