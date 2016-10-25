@@ -12,7 +12,7 @@ include HTTParty
     end
 
     def self.top5cache
-        if $redis.get("top5").nil?
+        if $redis.get("top1").nil?
             return self.top5
         else
             result1 =  JSON.parse($redis.get("top1"))
