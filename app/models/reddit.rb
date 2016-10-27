@@ -4,12 +4,7 @@ include HTTParty
     base_uri 'https://www.reddit.com'
     default_params sort: "top", t: "day"
     format :json
-    @@lastTime=nil
-    @@lastCache=nil
 
-    def self.debug
-        return "#{@@lastCache}, #{@@lastTime}, #{Time.now.utc}"
-    end
 
     def self.top5cache
         if $redis.get("top1").nil?
@@ -29,8 +24,8 @@ include HTTParty
     def self.top5
         
         time=Time.now.utc
-        if $redis.get("top1").nil? ||  @@lastTime.nil? || time-@@lastTime > 600
-            @@lastTime=time
+        if $redis.get("top1").nil? ||  $redis.get("lastUpdate").nil? || time-DateTime.iso8601($redis.get("lastUpdate")) > 600
+            $redis.set("lastUpdate",time.iso8601(9))
         else
             result1 =  JSON.parse($redis.get("top1"))
             result2 =  JSON.parse($redis.get("top2"))
