@@ -1,9 +1,14 @@
 Rails.application.routes.draw do
+  get 'reddit/redirect'
+
   get 'about' => 'static_pages#about'
 
   get 'news/index'
   get 'news/comment'
   root 'news#index'
+
+  match '*path' => 'reddit#redirect', via: :get
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
