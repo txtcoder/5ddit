@@ -40,8 +40,9 @@ include HTTParty
         banned_extension=[".gif",".png",".jpg",".pdf", ".gifv",".mp3",".mp4",".mov",".jpeg"]
         banned_subreddit=["funny","aww","earthporn","gifs","pics","mildlyinteresting","todayilearned","h3h3productions","videos","wtf","adviceanimals","woahdude","subredditsimulator","movies","music","books","television","comics","gaming","dota2","programming","xboxone","nottheonion","overwatch","pokemongo","globaloffensive","pcgaming","dataisbeautiful","starwars","makingamurderer","upliftingnews","leagueoflegends","hearthstone","showerthoughts","tifu","bestof","reddeadredemption","ps4","pokemon","destinythegame","explainlikeimfive","britishproblems","lifeprotips","jokes","askreddit","iama","internetisbeautiful","savedyouaclick"]
         us_nerfed_subreddit=["news","politics","the_donald","enoughtrumpspam"]
-        agenda_nerfed_subreddit=["trees","atheism","conspiracy"]
+        agenda_nerfed_subreddit=["trees","atheism","conspiracy","twoxchromosomes","lgbt"]
         educational_subreddit=["science","futurology","technology"]
+        politics_nerf_title=["trump","clinton","sanders","pence"]
         top5title=[]
         lowestscore=9999
         after=""
@@ -72,6 +73,10 @@ include HTTParty
                 if x["data"]["subreddit"].downcase=="technology" && (x["data"]["link_flair_text"].nil? || x["data"]["link_flair_text"] == "Politics")
                     score=score/1.2
                     score=score*0.8
+                end
+
+                if politics_nerf_title.any? { |y| x["data"]["title"].downcase.include? y}
+                    score=score*0.7
                 end
                
                 origscore=x["data"]["score"]
