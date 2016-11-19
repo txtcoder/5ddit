@@ -40,6 +40,8 @@ include HTTParty
         banned_extension=[".gif",".png",".jpg",".pdf", ".gifv",".mp3",".mp4",".mov",".jpeg"]
         banned_subreddit=["funny","aww","earthporn","gifs","pics","mildlyinteresting","todayilearned","h3h3productions","videos","wtf","adviceanimals","woahdude","subredditsimulator","movies","music","books","television","comics","gaming","dota2","programming","xboxone","nottheonion","overwatch","pokemongo","globaloffensive","pcgaming","dataisbeautiful","starwars","makingamurderer","upliftingnews","leagueoflegends","hearthstone","showerthoughts","tifu","bestof","reddeadredemption","ps4","pokemon","destinythegame","explainlikeimfive","britishproblems","lifeprotips","jokes","askreddit","iama","internetisbeautiful","savedyouaclick"]
         us_nerfed_subreddit=["news","politics","the_donald","enoughtrumpspam"]
+        agenda_nerfed_subreddit=["trees","atheism"]
+        educational_subreddit=["science","futurology","technology"]
         top5title=[]
         lowestscore=9999
         after=""
@@ -60,6 +62,16 @@ include HTTParty
                 score=x["data"]["score"]-(time-x["data"]["created_utc"].to_i).to_i/36
                 if us_nerfed_subreddit.any? {|y| x["data"]["subreddit"].downcase==y}
                     score=score*0.7
+                end
+                if agenda_nerfed_subreddit.any? { |y| x["data"]["subreddit"].downcase==y}
+                    score=score*0.8
+                end
+                if educational_subreddit.any? { |y| x["data"]["subreddit"].downcase==y}
+                    score=score*1.2
+                end
+                if x["data"]["subreddit"].downcase=="technology" && (x["data"]["link_flair_text"].nil? || x["data"]["link_flair_text"] == "Politics")
+                    score=score/1.2
+                    score=score*0.8
                 end
                
                 origscore=x["data"]["score"]
