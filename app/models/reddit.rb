@@ -42,7 +42,7 @@ include HTTParty
         us_nerfed_subreddit=["news","politics","the_donald","enoughtrumpspam"]
         agenda_nerfed_subreddit=["trees","atheism","conspiracy","twoxchromosomes","lgbt"]
         educational_subreddit=["science","futurology","technology"]
-        politics_nerf_title=["trump","clinton","sanders","pence"]
+        politics_nerf_title=["donald","trump","hillary","clinton","bernie","sanders","pence"]
         top5title=[]
         lowestscore=9999
         after=""
