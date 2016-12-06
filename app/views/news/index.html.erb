@@ -5,10 +5,10 @@
         <% temp = new["original_score"] %>
         <td><p class="title"><%= link_to "#{new["title"]}".html_safe, new["url"], :target => '_blank' %>
             <div class="hotness" title="<%="#{temp} upvotes" %>">
-           <% (temp/2000).times do %>
+           <% (temp/5000).times do %>
                     <%= image_tag("https://s3-us-west-2.amazonaws.com/5ddit/hot.png", size: "20x20") %>
             <% end %>
-            <% if temp%2000>=1000 %>
+            <% if temp%5000>=2500 %>
                 <%= image_tag("https://s3-us-west-2.amazonaws.com/5ddit/heat.png", size: "20x20") %>
             <% end %>
             </div>
