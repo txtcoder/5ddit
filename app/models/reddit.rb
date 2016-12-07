@@ -60,7 +60,7 @@ include HTTParty
 
                 next if x["data"]["is_self"]
 
-                score=x["data"]["score"]-(time-x["data"]["created_utc"].to_i).to_i/36
+                score=x["data"]["score"]*(100-((time-x["data"]["created_utc"].to_i).to_i/3600)*2)/100.0
                 if us_nerfed_subreddit.any? {|y| x["data"]["subreddit"].downcase==y}
                     score=score*0.7
                 end
