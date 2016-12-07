@@ -105,7 +105,7 @@ include HTTParty
             break if  top5title.size >  4 && lowestscore < top5title[4][:score]
         end
         res = top5title[0..4]
-        res.map! {|x| x.merge({comments: self.get_comment(x[:comment],x[:score]/100*15)})}
+        res.map! {|x| x.merge({comments: self.get_comment(x[:comment],x[:score]/100*5)})}
         $redis.set("top1",res[0].to_json)
         $redis.set("top2",res[1].to_json)
         $redis.set("top3",res[2].to_json)
