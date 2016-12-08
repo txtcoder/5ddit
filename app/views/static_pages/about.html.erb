@@ -4,8 +4,16 @@
     This website crawls reddit to search for the top 5 posts excluding images/videos/tweets.
 
     The content of the site gets auto refreshed every 10 minutes.
+    <br/>
+    <br/>
+    <% 10.times do |i| %>
+        <%= (i+1)**2 %>000+ upvotes =
+        <% (i+1).times do %>
+            <%= image_tag("https://s3-us-west-2.amazonaws.com/5ddit/hot.png", size: "20x20") %>
+        <% end %>
+        <br/>
+    <% end %>
 
-    Github Repo:<a href="https://github.com/txtcoder/5ddit"> https://github.com/txtcoder/5ddit</a>
     <br/> 
     <a href='https://play.google.com/store/apps/details?id=com.tommy.the5ddit&utm_source=global_co&utm_medium=prtnr&utm_content=Mar2515&utm_campaign=PartBadge&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img width= "200px" alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'/></a>
 </p>
