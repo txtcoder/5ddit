@@ -38,9 +38,10 @@ include HTTParty
         end
         banned_url =["imgur", "facebook", "youtu","meme","wikipedia","gfycat","twitter", "docs.google.com", "streamable","reddituploads","vimeo","liveleak","imgflip","giphy","sli.mg","oddshot.tv","spotify","chzbgr","tumblr","battle.net","twitch.tv","instagram","plus.google","thepoke.co.uk","deviantart","twimg.com","imgfly","imgcert","i.redd.it","google.com","screenpranks"]
         banned_extension=[".gif",".png",".jpg",".pdf", ".gifv",".mp3",".mp4",".mov",".jpeg"]
-        banned_subreddit=["funny","aww","earthporn","gifs","pics","mildlyinteresting","todayilearned","h3h3productions","videos","wtf","adviceanimals","woahdude","subredditsimulator","movies","music","books","television","comics","gaming","dota2","programming","xboxone","nottheonion","overwatch","pokemongo","globaloffensive","pcgaming","dataisbeautiful","starwars","makingamurderer","upliftingnews","leagueoflegends","hearthstone","showerthoughts","tifu","bestof","reddeadredemption","ps4","pokemon","destinythegame","explainlikeimfive","britishproblems","lifeprotips","jokes","askreddit","iama","internetisbeautiful","savedyouaclick"]
+        banned_subreddit=["funny","aww","earthporn","gifs","pics","mildlyinteresting","todayilearned","h3h3productions","videos","wtf","adviceanimals","woahdude","subredditsimulator","dota2","programming","xboxone","overwatch","pokemongo","globaloffensive","pcgaming","dataisbeautiful","starwars","makingamurderer","leagueoflegends","hearthstone","showerthoughts","tifu","bestof","reddeadredemption","ps4","pokemon","destinythegame","explainlikeimfive","britishproblems","lifeprotips","jokes","askreddit","iama","internetisbeautiful","savedyouaclick"]
         us_nerfed_subreddit=["news","politics","the_donald","enoughtrumpspam"]
         agenda_nerfed_subreddit=["trees","atheism","conspiracy","twoxchromosomes","lgbt"]
+        entertainment_nerfed_subreddit=["movies","music","books","television","comics","gaming","upliftingnews","nottheonion"]
         educational_subreddit=["science","futurology","technology"]
         politics_nerf_title=["donald","trump","hillary","clinton","bernie","sanders","pence"]
         top5title=[]
@@ -66,6 +67,9 @@ include HTTParty
                 end
                 if agenda_nerfed_subreddit.any? { |y| x["data"]["subreddit"].downcase==y}
                     score=score*0.8
+                end
+                if entertainment_nerfed_subreddit.any? { |y| x["data"]["subreddit"].downcase==y}
+                    score=score*0.5
                 end
                 if educational_subreddit.any? { |y| x["data"]["subreddit"].downcase==y}
                     score=score*1.2
