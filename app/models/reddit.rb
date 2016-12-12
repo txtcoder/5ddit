@@ -72,10 +72,10 @@ include HTTParty
                     score=score*0.5
                 end
                 if educational_subreddit.any? { |y| x["data"]["subreddit"].downcase==y}
-                    score=score*1.2
+                    score=score*2.0
                 end
                 if x["data"]["subreddit"].downcase=="technology" && (x["data"]["link_flair_text"].nil? || x["data"]["link_flair_text"] == "Politics")
-                    score=score/1.2
+                    score=score/2.0
                     score=score*0.8
                 end
 
