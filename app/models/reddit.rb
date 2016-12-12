@@ -63,7 +63,7 @@ include HTTParty
 
                 score=x["data"]["score"]*(100-1.15*(((time-x["data"]["created_utc"].to_i).to_i/3600)**2)/10)/100.0
                 if us_nerfed_subreddit.any? {|y| x["data"]["subreddit"].downcase==y}
-                    score=score*0.7
+                    score=score*0.4
                 end
                 if agenda_nerfed_subreddit.any? { |y| x["data"]["subreddit"].downcase==y}
                     score=score*0.8
