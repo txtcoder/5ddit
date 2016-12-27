@@ -44,6 +44,7 @@ include HTTParty
         entertainment_nerfed_subreddit=["movies","music","books","television","comics","gaming","upliftingnews","nottheonion"]
         educational_subreddit=["science","futurology","technology"]
         politics_nerf_title=["donald","trump","hillary","clinton","bernie","sanders","pence"]
+        common_words = ["to","for","a", "an", "that", "is", "with", "at", "such", "or", "and", "have", "has", "of", "the", "it's", "are", "be"]
         top5title=[]
         lowestscore=9999
         after=""
@@ -91,19 +92,20 @@ include HTTParty
                 posted=(time-x["data"]["created_utc"].to_i).to_i/60
                 comment=x["data"]["permalink"]
                 thumbnail=x["data"]["thumbnail"]
+                titleHash=title.split(" ")-common_words
 
                 #check duplicates
                 skip = false
                 top5title.each do |post|
                     if title == post[:title] && url==post[:url] && category==post[:category]
                         skip=true
-                    elsif title == post[:title] || url==post[:url]
+                    elsif ((titleHash - post[:titleHash]).size < titleHash.size/2) || ((post[:titleHash] - titleHash).size < post[:titleHash].size/2 || url==post[:url]
                         post[:score]+=score/2
                         post[:original_score]+=origscore/2
                         skip = true
                     end
                 end
-                top5title.push({score: score, original_score: origscore, title: title, url: url, category: category, domain: domain, posted: posted, comment: comment, thumbnail: thumbnail}) unless skip
+                top5title.push({score: score, original_score: origscore, title: title, url: url, category: category, domain: domain, posted: posted, comment: comment, thumbnail: thumbnail, titleHash: titleHash}) unless skip
             end
             top5title.sort!{|x,y| y[:score]<=>x[:score]}
             break if  top5title.size >  4 && lowestscore < top5title[4][:score]
