@@ -94,6 +94,24 @@ include HTTParty
                 thumbnail=x["data"]["thumbnail"]
                 titleHash=(title.split(" ")-common_words).map{|x| x.downcase}
 
+                #fix the_donald titles 
+                if x["data"]["subreddit"].downcase=="the_donald"
+                   #if all uppercase make all lower case
+                   tmp = title.split(" ")
+                   if tmp.all? {|x| x == x.upcase}
+                        tmp.map!{|x| x.downcase}
+                        title=tmp.join(" ")
+                   end
+                   #remove last sentence if last sentence is a smark remark
+                   sentence = title.split(".")
+                   if sentence[-1].downcase.include?("would be a shame") || sentence[-1].downcase.include?("get this to the top")
+                      sentence.pop
+                      title=sentence.join(".")
+                   end
+
+                   
+                end
+
                 #check duplicates
                 skip = false
                 top5title.each do |post|
