@@ -99,7 +99,7 @@ include HTTParty
                 top5title.each do |post|
                     if title == post[:title] && url==post[:url] && category==post[:category]
                         skip=true
-                    elsif ((titleHash - post[:titleHash]).size < titleHash.size/2) || ((post[:titleHash] - titleHash).size < post[:titleHash].size/2 || url==post[:url]
+                    elsif ((titleHash - post[:titleHash]).size < titleHash.size/2) || ((post[:titleHash] - titleHash).size < post[:titleHash].size/2) || url==post[:url]
                         post[:score]+=score/2
                         post[:original_score]+=origscore/2
                         skip = true
