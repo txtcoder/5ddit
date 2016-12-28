@@ -41,7 +41,8 @@ include HTTParty
         banned_subreddit=["funny","aww","earthporn","gifs","pics","mildlyinteresting","todayilearned","h3h3productions","videos","wtf","adviceanimals","woahdude","subredditsimulator","dota2","programming","xboxone","overwatch","pokemongo","globaloffensive","pcgaming","dataisbeautiful","starwars","makingamurderer","leagueoflegends","hearthstone","showerthoughts","tifu","bestof","reddeadredemption","ps4","pokemon","destinythegame","explainlikeimfive","britishproblems","lifeprotips","jokes","askreddit","iama","internetisbeautiful","savedyouaclick"]
         us_nerfed_subreddit=["news","politics","enoughtrumpspam"]
         agenda_nerfed_subreddit=["trees","atheism","conspiracy","twoxchromosomes","lgbt"]
-        entertainment_nerfed_subreddit=["movies","music","books","television","comics","gaming","upliftingnews","nottheonion"]
+        entertainment_nerfed_subreddit=["movies","music","books","television","comics","gaming","upliftingnews"]
+        stupid_nerfed_subreddit=["nottheonion"]
         educational_subreddit=["science","futurology","technology"]
         politics_nerf_title=["donald","trump","hillary","clinton","bernie","sanders","pence"]
         common_words = ["to","for","a", "an", "that", "is", "with", "at", "such", "or", "and", "have", "has", "of", "the", "it's", "are", "be"]
@@ -71,6 +72,9 @@ include HTTParty
                 end
                 if entertainment_nerfed_subreddit.any? { |y| x["data"]["subreddit"].downcase==y}
                     score=score*0.5
+                end
+                if stupid_nerfed_subreddit.any? {|y| x["data"]["subreddit"].downcase==y}
+                    score=score*0.1
                 end
                 if educational_subreddit.any? { |y| x["data"]["subreddit"].downcase==y}
                     score=score*2.0
