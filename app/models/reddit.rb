@@ -85,7 +85,7 @@ include HTTParty
                 end
 
                 if politics_nerf_title.any? { |y| x["data"]["title"].downcase.include? y}
-                    score=score*0.4
+                    score=score*0.3
                 end
                
                 origscore=x["data"]["score"]
@@ -98,8 +98,14 @@ include HTTParty
                 thumbnail=x["data"]["thumbnail"]
                 titleHash=(title.split(" ")-common_words).map{|x| x.downcase}
 
-                #fix the_donald titles 
+
+            
+                #fixes for the_donald
                 if x["data"]["subreddit"].downcase=="the_donald"
+
+                   #undo reddit censorship by boosting scores
+                   score = score*2.5
+
                    #if all uppercase make all lower case
                    tmp = title.split(" ")
                    if tmp.all? {|x| x == x.upcase}
