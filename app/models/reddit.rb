@@ -79,7 +79,7 @@ include HTTParty
                 if educational_subreddit.any? { |y| x["data"]["subreddit"].downcase==y}
                     score=score*2.0
                 end
-                if x["data"]["subreddit"].downcase=="technology" && (x["data"]["link_flair_text"].nil? || x["data"]["link_flair_text"] == "Politics")
+                if x["data"]["subreddit"].downcase=="technology" && (x["data"]["link_flair_text"].nil? || x["data"]["link_flair_text"] == "Politics" || x["data"]["link_flair_text"] == "Net Neutrality")
                     score=score/2.0
                     score=score*0.8
                 end
