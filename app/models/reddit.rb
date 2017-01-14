@@ -50,9 +50,12 @@ include HTTParty
         lowestscore=9999
         after=""
         loop do
-            tquery=get("/r/all/top.json", query:{after: after}, headers: {"User-Agent" => "5ddit"})
+            tquery=get("/r/all/top.json", query:{after: after}, headers: {"User-Agent" => "5ddit-new"})
             unless tquery.kind_of?(Hash)
                 raise "reddit is down"
+            end
+            if tquery["data"] == nil
+                raise "data not found"
             end
             after = tquery["data"]["after"]
             tquery["data"]["children"].each do |x|
