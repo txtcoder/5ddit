@@ -99,7 +99,7 @@ include HTTParty
                 posted=(time-x["data"]["created_utc"].to_i).to_i/60
                 comment=x["data"]["permalink"]
                 thumbnail=x["data"]["thumbnail"]
-                titleHash=(title.split(" ")-common_words).map{|x| x.downcase}
+                titleHash=(title.split(" ")-common_words).map{|x| x.downcase.gsub(/[^0-9a-z]/,'')}
 
 
             
