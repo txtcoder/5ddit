@@ -36,7 +36,7 @@ include HTTParty
             results << result1 << result2 << result3 << result4 << result5
             return results
         end
-        banned_url =["imgur", "facebook", "youtu","meme","wikipedia","gfycat","twitter", "docs.google.com", "streamable","reddituploads","vimeo","liveleak","imgflip","giphy","sli.mg","oddshot.tv","spotify","chzbgr","tumblr","battle.net","twitch.tv","instagram","plus.google","thepoke.co.uk","deviantart","twimg.com","imgfly","imgcert","i.redd.it","google.com","screenpranks","change.org","redd.it","steam"]
+        banned_url =["imgur", "facebook", "youtu","meme","wikipedia","gfycat","twitter", "docs.google.com", "streamable","reddituploads","vimeo","liveleak","imgflip","giphy","sli.mg","oddshot.tv","spotify","chzbgr","tumblr","battle.net","twitch.tv","instagram","plus.google","thepoke.co.uk","deviantart","twimg.com","imgfly","imgcert","i.redd.it","google.com","screenpranks","change.org","redd.it","steam","images.duckduckgo"]
         banned_extension=[".gif",".png",".jpg",".pdf", ".gifv",".mp3",".mp4",".mov",".jpeg"]
         banned_subreddit=["funny","aww","earthporn","gifs","pics","mildlyinteresting","todayilearned","h3h3productions","videos","wtf","adviceanimals","woahdude","subredditsimulator","dota2","programming","xboxone","overwatch","pokemongo","globaloffensive","pcgaming","dataisbeautiful","starwars","makingamurderer","leagueoflegends","hearthstone","showerthoughts","tifu","bestof","reddeadredemption","ps4","pokemon","destinythegame","explainlikeimfive","britishproblems","lifeprotips","jokes","askreddit","iama","internetisbeautiful","savedyouaclick","circlejerk","enoughtrumpspam"]
         us_nerfed_subreddit=["news","politics"]
@@ -68,7 +68,7 @@ include HTTParty
 
                 score=x["data"]["score"]*(100-1.15*(((time-x["data"]["created_utc"].to_i).to_i/3600)**2)/10)/100.0
                 if us_nerfed_subreddit.any? {|y| x["data"]["subreddit"].downcase==y}
-                    score=score*0.4
+                    score=score*0.1
                 end
                 if agenda_nerfed_subreddit.any? { |y| x["data"]["subreddit"].downcase==y}
                     score=score*0.8
@@ -106,15 +106,11 @@ include HTTParty
                 #fixes for the_donald
                 if x["data"]["subreddit"].downcase=="the_donald"
 
-                   #undo reddit censorship by boosting scores
-                   score = score*2.5
-
-                   #if all uppercase make all lower case
+                   #make all lowercase regardless
                    tmp = title.split(" ")
-                   if tmp.all? {|x| x == x.upcase}
-                        tmp.map!{|x| x.downcase}
-                        title=tmp.join(" ")
-                   end
+                   tmp.map!{|x| x.downcase}
+                   title=tmp.join(" ")
+
                    #remove last sentence if last sentence is a smark remark
                    sentence = title.split(".")
                    if sentence[-1].downcase.include?("would be a shame") || sentence[-1].downcase.include?("get this to the top")
