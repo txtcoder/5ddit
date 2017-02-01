@@ -71,10 +71,10 @@ include HTTParty
                     score=score*0.1
                 end
                 if agenda_nerfed_subreddit.any? { |y| x["data"]["subreddit"].downcase==y}
-                    score=score*0.8
+                    score=score*0.5
                 end
                 if entertainment_nerfed_subreddit.any? { |y| x["data"]["subreddit"].downcase==y}
-                    score=score*0.5
+                    score=score*0.2
                 end
                 if stupid_nerfed_subreddit.any? {|y| x["data"]["subreddit"].downcase==y}
                     score=score*0.1
