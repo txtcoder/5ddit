@@ -105,7 +105,9 @@ include HTTParty
             
                 #fixes for the_donald
                 if x["data"]["subreddit"].downcase=="the_donald"
-
+                   
+                   #slight nerf score
+                   score=score*0.5
                    #make all lowercase regardless
                    tmp = title.split(" ")
                    tmp.map!{|x| x.downcase}
