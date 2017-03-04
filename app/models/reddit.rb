@@ -39,7 +39,7 @@ include HTTParty
         banned_url =["imgur", "facebook", "youtu","meme","wikipedia","gfycat","twitter", "docs.google.com", "streamable","reddituploads","vimeo","liveleak","imgflip","giphy","sli.mg","oddshot.tv","spotify","chzbgr","tumblr","battle.net","twitch.tv","instagram","plus.google","thepoke.co.uk","deviantart","twimg.com","imgfly","imgcert","i.redd.it","google.com","screenpranks","change.org","redd.it","steam","images.duckduckgo"]
         banned_extension=[".gif",".png",".jpg",".pdf", ".gifv",".mp3",".mp4",".mov",".jpeg"]
         banned_subreddit=["funny","aww","earthporn","gifs","pics","mildlyinteresting","todayilearned","h3h3productions","videos","wtf","adviceanimals","woahdude","subredditsimulator","dota2","programming","xboxone","overwatch","pokemongo","globaloffensive","pcgaming","dataisbeautiful","starwars","makingamurderer","leagueoflegends","hearthstone","showerthoughts","tifu","bestof","reddeadredemption","ps4","pokemon","destinythegame","explainlikeimfive","britishproblems","lifeprotips","jokes","askreddit","iama","internetisbeautiful","savedyouaclick","circlejerk","enoughtrumpspam","marchagainsttrump","esist"]
-        us_nerfed_subreddit=["news","politics"]
+        us_nerfed_subreddit=["news","politics","the_donald"]
         agenda_nerfed_subreddit=["trees","atheism","conspiracy","twoxchromosomes","lgbt"]
         entertainment_nerfed_subreddit=["movies","music","books","television","comics","gaming","upliftingnews"]
         stupid_nerfed_subreddit=["nottheonion"]
@@ -68,7 +68,7 @@ include HTTParty
 
                 score=x["data"]["score"]*(100-1.15*(((time-x["data"]["created_utc"].to_i).to_i/3600)**2)/10)/100.0
                 if us_nerfed_subreddit.any? {|y| x["data"]["subreddit"].downcase==y}
-                    score=score*0.1
+                    score=score*0.05
                 end
                 if agenda_nerfed_subreddit.any? { |y| x["data"]["subreddit"].downcase==y}
                     score=score*0.5
@@ -106,8 +106,6 @@ include HTTParty
                 #fixes for the_donald
                 if x["data"]["subreddit"].downcase=="the_donald"
                    
-                   #slight nerf score
-                   score=score*0.5
                    #make all lowercase regardless
                    tmp = title.split(" ")
                    tmp.map!{|x| x.downcase}
