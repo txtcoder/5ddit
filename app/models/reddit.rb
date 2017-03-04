@@ -135,7 +135,7 @@ include HTTParty
                 top5title.push({score: score, original_score: origscore, title: title, url: url, category: category, domain: domain, posted: posted, comment: comment, thumbnail: thumbnail, titleHash: titleHash}) unless skip
             end
             top5title.sort!{|x,y| y[:score]<=>x[:score]}
-            break if  top5title.size >  4 && lowestscore < top5title[4][:score]
+            break if  top5title.size >  4 && lowestscore/10 < top5title[4][:score]
         end
         res = top5title[0..4]
         res.map! {|x| x.merge({comments: self.get_comment(x[:comment],x[:score]/100*5)})}
