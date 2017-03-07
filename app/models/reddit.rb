@@ -84,7 +84,7 @@ include HTTParty
                     score=score*2.0
                 end
 
-                if political_news.any? { |y| x["data"]["domain"].downcase==y}
+                if political_news.any? { |y| x["data"]["domain"].include?(y)}
                     score=score*0.2
                 end
 
