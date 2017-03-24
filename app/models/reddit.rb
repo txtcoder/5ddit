@@ -44,7 +44,7 @@ include HTTParty
         entertainment_nerfed_subreddit=["movies","music","books","television","comics","gaming","upliftingnews"]
         stupid_nerfed_subreddit=["nottheonion"]
         educational_subreddit=["science","futurology","technology"]
-        politics_nerf_title=["donald","trump","hillary","clinton","bernie","sanders","pence"]
+        politics_nerf_title=["donald","trump","hillary","clinton","bernie","sanders","pence","congress","senator","senators","senate"]
         political_news=["huffingtonpost","shareblue"]
         common_words = ["to","for","a", "an", "that", "is", "with", "at", "such", "or", "and", "have", "has", "of", "the", "it's", "are", "be", "in"]
         top5title=[]
@@ -86,16 +86,16 @@ include HTTParty
                 end
 
                 if political_news.any? { |y| x["data"]["domain"].include?(y)}
-                    score=score*0.2
+                    score=score*0.01
                 end
 
                 if x["data"]["subreddit"].downcase=="technology" && (x["data"]["link_flair_text"].nil? || x["data"]["link_flair_text"] == "Politics" || x["data"]["link_flair_text"] == "Net Neutrality")
                     score=score/2.0
-                    score=score*0.8
+                    score=score*0.1
                 end
 
                 if politics_nerf_title.any? { |y| x["data"]["title"].downcase.include? y}
-                    score=score*0.3
+                    score=score*0.1
                 end
                
                 origscore=x["data"]["score"]
