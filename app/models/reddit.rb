@@ -44,8 +44,8 @@ include HTTParty
         entertainment_nerfed_subreddit=["movies","music","books","television","comics","gaming","upliftingnews"]
         stupid_nerfed_subreddit=["nottheonion"]
         educational_subreddit=["science","futurology","technology"]
-        politics_nerf_title=["donald","trump","hillary","clinton","bernie","sanders","pence","congress","senator","senators","senate"]
-        political_news=["huffingtonpost","shareblue"]
+        politics_nerf_title=["donald","trump","hillary","clinton","bernie","sanders","pence","congress","senator","senators","senate","trump's"]
+        political_news=["huffingtonpost","shareblue","independent.co.uk/news/world/americas"]
         common_words = ["to","for","a", "an", "that", "is", "with", "at", "such", "or", "and", "have", "has", "of", "the", "it's", "are", "be", "in"]
         top5title=[]
         lowestscore=9999
@@ -70,7 +70,7 @@ include HTTParty
 
                 score=x["data"]["score"]*(100-1.15*(((time-x["data"]["created_utc"].to_i).to_i/3600)**2)/10)/100.0
                 if us_nerfed_subreddit.any? {|y| x["data"]["subreddit"].downcase==y}
-                    score=score*0.05
+                    score=score*0.01
                 end
                 if agenda_nerfed_subreddit.any? { |y| x["data"]["subreddit"].downcase==y}
                     score=score*0.5
@@ -85,8 +85,8 @@ include HTTParty
                     score=score*2.0
                 end
 
-                if political_news.any? { |y| x["data"]["domain"].include?(y)}
-                    score=score*0.01
+                if political_news.any? { |y| x["data"]["url"].include?(y)}
+                    score=score*0.02
                 end
 
                 if x["data"]["subreddit"].downcase=="technology" && (x["data"]["link_flair_text"].nil? || x["data"]["link_flair_text"] == "Politics" || x["data"]["link_flair_text"] == "Net Neutrality")
@@ -95,7 +95,7 @@ include HTTParty
                 end
 
                 if politics_nerf_title.any? { |y| x["data"]["title"].downcase.include? y}
-                    score=score*0.1
+                    score=score*0.01
                 end
                
                 origscore=x["data"]["score"]
