@@ -95,7 +95,7 @@ include HTTParty
                 end
 
                 if politics_nerf_title.any? { |y| x["data"]["title"].downcase.include? y}
-                    score=score*0.01
+                    score=score*0.05
                 end
                
                 origscore=x["data"]["score"]
