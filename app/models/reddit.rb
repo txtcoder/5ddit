@@ -41,7 +41,7 @@ include HTTParty
         banned_subreddit=["funny","aww","earthporn","gifs","pics","mildlyinteresting","todayilearned","h3h3productions","videos","wtf","adviceanimals","woahdude","subredditsimulator","dota2","programming","xboxone","overwatch","pokemongo","globaloffensive","pcgaming","dataisbeautiful","starwars","makingamurderer","leagueoflegends","hearthstone","showerthoughts","tifu","bestof","reddeadredemption","ps4","pokemon","destinythegame","explainlikeimfive","britishproblems","lifeprotips","jokes","askreddit","iama","internetisbeautiful","savedyouaclick","circlejerk","enoughtrumpspam","marchagainsttrump","esist","impeach_trump","osugame"]
         us_nerfed_subreddit=["news","politics","the_donald"]
         agenda_nerfed_subreddit=["trees","atheism","conspiracy","twoxchromosomes","lgbt"]
-        entertainment_nerfed_subreddit=["movies","music","books","television","comics","gaming","upliftingnews"]
+        entertainment_nerfed_subreddit=["movies","music","books","television","comics","gaming","upliftingnews","mma"]
         stupid_nerfed_subreddit=["nottheonion"]
         educational_subreddit=["science","futurology","technology"]
         politics_nerf_title=["donald","trump","hillary","clinton","bernie","sanders","pence","congress","senator","senators","senate","trump's"]
