@@ -45,7 +45,7 @@ include HTTParty
         stupid_nerfed_subreddit=["nottheonion"]
         educational_subreddit=["science","futurology","technology"]
         politics_nerf_title=["donald","trump","hillary","clinton","bernie","sanders","pence","congress","senator","senators","senate","trump's"]
-        political_news=["huffingtonpost","shareblue","independent.co.uk/news/world/americas"]
+        political_news=["huffingtonpost","shareblue","independent.co.uk"]
         common_words = ["to","for","a", "an", "that", "is", "with", "at", "such", "or", "and", "have", "has", "of", "the", "it's", "are", "be", "in"]
         top5title=[]
         lowestscore=9999
