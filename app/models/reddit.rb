@@ -1,6 +1,6 @@
 class Reddit
 include HTTParty
-  
+
     base_uri 'https://www.reddit.com'
     default_params sort: "top", t: "day"
     format :json
@@ -22,7 +22,7 @@ include HTTParty
     end
 
     def self.top5
-        
+
         time=Time.now.utc
         if $redis.get("top1").nil? ||  $redis.get("lastUpdate").nil? || time-DateTime.iso8601($redis.get("lastUpdate")) > 600
             $redis.set("lastUpdate",time.iso8601(9))
@@ -36,9 +36,9 @@ include HTTParty
             results << result1 << result2 << result3 << result4 << result5
             return results
         end
-        banned_url =["imgur", "facebook", "youtu","meme","wikipedia","gfycat","twitter", "docs.google.com", "streamable","reddituploads","vimeo","liveleak","imgflip","giphy","sli.mg","oddshot.tv","spotify","chzbgr","tumblr","battle.net","twitch.tv","instagram","plus.google","thepoke.co.uk","deviantart","twimg.com","imgfly","imgcert","i.redd.it","google.com","screenpranks","change.org","redd.it","steam","images.duckduckgo","vid.me","reddit","itunes.apple.com","strawpoll.com","wizards.com","cc.com","flickr"]
+        banned_url =["imgur", "facebook", "youtu","meme","wikipedia","gfycat","twitter", "docs.google.com", "streamable","reddituploads","vimeo","liveleak","imgflip","giphy","sli.mg","oddshot.tv","spotify","chzbgr","tumblr","battle.net","twitch.tv","instagram","plus.google","thepoke.co.uk","deviantart","twimg.com","imgfly","imgcert","i.redd.it","google.com","screenpranks","change.org","redd.it","steam","images.duckduckgo","vid.me","reddit","itunes.apple.com","strawpoll.com","wizards.com","cc.com","flickr","netflix.com","apps.varden.info"]
         banned_extension=[".gif",".png",".jpg",".pdf", ".gifv",".mp3",".mp4",".mov",".jpeg"]
-        banned_subreddit=["funny","aww","earthporn","gifs","pics","mildlyinteresting","todayilearned","h3h3productions","videos","wtf","adviceanimals","woahdude","subredditsimulator","dota2","programming","xboxone","overwatch","pokemongo","globaloffensive","pcgaming","dataisbeautiful","starwars","makingamurderer","leagueoflegends","hearthstone","showerthoughts","tifu","bestof","reddeadredemption","ps4","pokemon","destinythegame","explainlikeimfive","britishproblems","lifeprotips","jokes","askreddit","iama","internetisbeautiful","savedyouaclick","circlejerk","enoughtrumpspam","marchagainsttrump","esist","impeach_trump","osugame"]
+        banned_subreddit=["funny","aww","earthporn","gifs","pics","mildlyinteresting","todayilearned","h3h3productions","videos","wtf","adviceanimals","woahdude","subredditsimulator","dota2","programming","xboxone","overwatch","pokemongo","globaloffensive","pcgaming","dataisbeautiful","starwars","makingamurderer","leagueoflegends","hearthstone","showerthoughts","tifu","bestof","reddeadredemption","ps4","pokemon","destinythegame","explainlikeimfive","britishproblems","lifeprotips","jokes","askreddit","iama","internetisbeautiful","savedyouaclick","circlejerk","enoughtrumpspam","marchagainsttrump","esist","impeach_trump","osugame","me_irl","garlicoin"]
         us_nerfed_subreddit=["news","politics","the_donald"]
         agenda_nerfed_subreddit=["trees","atheism","conspiracy","twoxchromosomes","lgbt"]
         entertainment_nerfed_subreddit=["movies","music","books","television","comics","gaming","upliftingnews","mma"]
@@ -97,7 +97,7 @@ include HTTParty
                 if politics_nerf_title.any? { |y| x["data"]["title"].downcase.include? y}
                     score=score*0.05
                 end
-               
+
                 origscore=x["data"]["score"]
                 title=x["data"]["title"]
                 url=x["data"]["url"]
@@ -109,10 +109,10 @@ include HTTParty
                 titleHash=(title.split(" ")-common_words).map{|x| x.downcase.gsub(/[^0-9a-z]/,'')}
 
 
-            
+
                 #fixes for the_donald
                 if x["data"]["subreddit"].downcase=="the_donald"
-                   
+
                    #make all lowercase regardless
                    tmp = title.split(" ")
                    tmp.map!{|x| x.downcase}
@@ -125,7 +125,7 @@ include HTTParty
                       title=sentence.join(".")
                    end
 
-                   
+
                 end
 
                 #check duplicates
@@ -158,15 +158,15 @@ include HTTParty
         topcomments=[]
         comments=get(URI.encode(commentUrl)+".json", headers: {"User-Agent" => "5ddit"})
         if comments.kind_of?(Array)
-            start=comments[1] 
+            start=comments[1]
             topcomments = self.simplifyJson(start,score)
         end
     end
 
-    
+
     def self.simplifyJson(json,score)
         return if json["data"]==nil
-        json=json["data"]["children"] 
+        json=json["data"]["children"]
         arr=[]
         json.each do |x|
             if x["data"]["score"] && x["data"]["score"]>score && x["data"]["author"] != "[deleted]"
