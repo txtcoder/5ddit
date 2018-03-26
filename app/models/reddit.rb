@@ -21,6 +21,19 @@ include HTTParty
         end
     end
 
+    def similar(str1, str2)
+      a = str1.split('://')[-1]
+      b = str2.split('://')[-1]
+      if a.start_with?('m.')
+       a = a[2..-1]
+      end
+      if b.start_with?('m.')
+       b = b[2..-1]
+      end
+      small = [a.length,b.length].min
+      return a[0..small-1]==b[0..small-1]
+    end
+
     def self.top5
 
         time=Time.now.utc
@@ -46,7 +59,7 @@ include HTTParty
         educational_subreddit=["science","futurology","technology"]
         politics_nerf_title=["donald","trump","hillary","clinton","bernie","sanders","pence","congress","senator","senators","senate","trump's"]
         political_news=["huffingtonpost","shareblue","independent.co.uk"]
-        common_words = ["to","for","a", "an", "that", "is", "with", "at", "such", "or", "and", "have", "has", "of", "the", "it's", "are", "be", "in"]
+        common_words = ["to","for","a", "an", "that", "is", "with", "at", "such", "or", "and", "have", "has", "of", "the", "it's", "are", "be", "in","about","since","because","then","rather","on","than"]
         top5title=[]
         lowestscore=9999
         after=""
@@ -76,10 +89,10 @@ include HTTParty
                     score=score*0.3
                 end
                 if entertainment_nerfed_subreddit.any? { |y| x["data"]["subreddit"].downcase==y}
-                    score=score*0.15
+                    score=score*0.05
                 end
                 if stupid_nerfed_subreddit.any? {|y| x["data"]["subreddit"].downcase==y}
-                    score=score*0.1
+                    score=score*0.025
                 end
                 if educational_subreddit.any? { |y| x["data"]["subreddit"].downcase==y}
                     score=score*2.0
@@ -108,32 +121,12 @@ include HTTParty
                 thumbnail=x["data"]["thumbnail"]
                 titleHash=(title.split(" ")-common_words).map{|x| x.downcase.gsub(/[^0-9a-z]/,'')}
 
-
-
-                #fixes for the_donald
-                if x["data"]["subreddit"].downcase=="the_donald"
-
-                   #make all lowercase regardless
-                   tmp = title.split(" ")
-                   tmp.map!{|x| x.downcase}
-                   title=tmp.join(" ")
-
-                   #remove last sentence if last sentence is a smark remark
-                   sentence = title.split(".")
-                   if sentence[-1].downcase.include?("would be a shame") || sentence[-1].downcase.include?("get this to the top")
-                      sentence.pop
-                      title=sentence.join(".")
-                   end
-
-
-                end
-
                 #check duplicates
                 skip = false
                 top5title.each do |post|
                     if title == post[:title] && url==post[:url] && category==post[:category]
                         skip=true
-                    elsif ((titleHash - post[:titleHash]).size < titleHash.size/2) || ((post[:titleHash] - titleHash).size < post[:titleHash].size/2) || url==post[:url]
+                    elsif ((titleHash - post[:titleHash]).size < titleHash.size/2) || ((post[:titleHash] - titleHash).size < post[:titleHash].size/2) || similar(url,post[:url])
                         post[:score]+=score/2
                         post[:original_score]+=origscore/2
                         skip = true
