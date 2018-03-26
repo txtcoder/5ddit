@@ -21,7 +21,7 @@ include HTTParty
         end
     end
 
-    def similar(str1, str2)
+    def self.similar(str1, str2)
       a = str1.split('://')[-1]
       b = str2.split('://')[-1]
       if a.start_with?('m.')
@@ -126,7 +126,7 @@ include HTTParty
                 top5title.each do |post|
                     if title == post[:title] && url==post[:url] && category==post[:category]
                         skip=true
-                    elsif ((titleHash - post[:titleHash]).size < titleHash.size/2) || ((post[:titleHash] - titleHash).size < post[:titleHash].size/2) || similar(url,post[:url])
+                    elsif ((titleHash - post[:titleHash]).size < titleHash.size/2) || ((post[:titleHash] - titleHash).size < post[:titleHash].size/2) || self.similar(url,post[:url])
                         post[:score]+=score/2
                         post[:original_score]+=origscore/2
                         skip = true
