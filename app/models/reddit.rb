@@ -86,20 +86,20 @@ include HTTParty
                     score=score*0.01
                 end
                 if agenda_nerfed_subreddit.any? { |y| x["data"]["subreddit"].downcase==y}
-                    score=score*0.3
+                    score=score*0.2
                 end
                 if entertainment_nerfed_subreddit.any? { |y| x["data"]["subreddit"].downcase==y}
-                    score=score*0.05
+                    score=score*0.02
                 end
                 if stupid_nerfed_subreddit.any? {|y| x["data"]["subreddit"].downcase==y}
-                    score=score*0.025
+                    score=score*0.02
                 end
                 if educational_subreddit.any? { |y| x["data"]["subreddit"].downcase==y}
                     score=score*2.0
                 end
 
                 if political_news.any? { |y| x["data"]["url"].include?(y)}
-                    score=score*0.02
+                    score=score*0.01
                 end
 
                 if x["data"]["subreddit"].downcase=="technology" && (x["data"]["link_flair_text"].nil? || x["data"]["link_flair_text"] == "Politics" || x["data"]["link_flair_text"] == "Net Neutrality")
