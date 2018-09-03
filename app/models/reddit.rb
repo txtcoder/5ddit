@@ -49,7 +49,7 @@ include HTTParty
             results << result1 << result2 << result3 << result4 << result5
             return results
         end
-        banned_url =["imgur", "facebook", "youtu","meme","wikipedia","gfycat","twitter", "docs.google.com", "streamable","reddituploads","vimeo","liveleak","imgflip","giphy","sli.mg","oddshot.tv","spotify","chzbgr","tumblr","battle.net","twitch.tv","instagram","plus.google","thepoke.co.uk","deviantart","twimg.com","imgfly","imgcert","i.redd.it","google.com","screenpranks","change.org","redd.it","steam","images.duckduckgo","vid.me","reddit","itunes.apple.com","strawpoll.com","wizards.com","cc.com","flickr","netflix.com","apps.varden.info","theonion.com","clippituser.tv"]
+        banned_url =["imgur", "facebook", "youtu","meme","wikipedia","gfycat","twitter", "docs.google.com", "streamable","reddituploads","vimeo","liveleak","imgflip","giphy","sli.mg","oddshot.tv","spotify","chzbgr","tumblr","battle.net","twitch.tv","instagram","plus.google","thepoke.co.uk","deviantart","twimg.com","imgfly","imgcert","i.redd.it","google.com","screenpranks","change.org","redd.it","steam","images.duckduckgo","vid.me","reddit","itunes.apple.com","strawpoll.com","wizards.com","cc.com","flickr","netflix.com","apps.varden.info","theonion.com","clippituser.tv","streamja"]
         banned_extension=[".gif",".png",".jpg",".pdf", ".gifv",".mp3",".mp4",".mov",".jpeg"]
         banned_subreddit=["funny","aww","earthporn","gifs","pics","mildlyinteresting","todayilearned","h3h3productions","videos","wtf","adviceanimals","woahdude","subredditsimulator","dota2","programming","xboxone","overwatch","pokemongo","globaloffensive","pcgaming","dataisbeautiful","starwars","makingamurderer","leagueoflegends","hearthstone","showerthoughts","tifu","bestof","reddeadredemption","ps4","pokemon","destinythegame","explainlikeimfive","britishproblems","lifeprotips","jokes","askreddit","iama","internetisbeautiful","savedyouaclick","circlejerk","enoughtrumpspam","marchagainsttrump","esist","impeach_trump","osugame","me_irl","garlicoin"]
         us_nerfed_subreddit=["news","politics","the_donald"]
@@ -57,7 +57,7 @@ include HTTParty
         entertainment_nerfed_subreddit=["movies","music","books","television","comics","gaming","upliftingnews","mma"]
         stupid_nerfed_subreddit=["nottheonion"]
         educational_subreddit=["science","futurology","technology"]
-        politics_nerf_title=["donald","trump","hillary","clinton","bernie","sanders","pence","congress","senator","senators","senate","trump's"]
+        politics_nerf_title=["donald","trump","hillary","clinton","bernie","sanders","pence","congress","senator","senators","senate","trump's","putin", "russia"]
         political_news=["huffingtonpost","shareblue","independent.co.uk"]
         common_words = ["to","for","a", "an", "that", "is", "with", "at", "such", "or", "and", "have", "has", "of", "the", "it's", "are", "be", "in","about","since","because","then","rather","on","than"]
         top5title=[]
@@ -108,7 +108,7 @@ include HTTParty
                 end
 
                 if politics_nerf_title.any? { |y| x["data"]["title"].downcase.include? y}
-                    score=score*0.05
+                    score=score*0.03
                 end
 
                 origscore=x["data"]["score"]
